@@ -20,7 +20,7 @@
                 buffer,
                 
                 
-                    sampleSound = 'test/audio/01_piste_01.ogg';
+                    sampleSound = 'test/audio/sample.ogg';
     
     
     
