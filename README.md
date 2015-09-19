@@ -1,4 +1,5 @@
 # jsComp
 jsPlay Compressor
 
-demo: direct-shoot.com/jsComp
+
+demo: http://direct-shoot.com/jsComp
