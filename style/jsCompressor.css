@@ -1,0 +1,59 @@
+ 
+@import url(https://fonts.googleapis.com/css?family=Lora);
+ 
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-color: #fff;
+    }
+    
+    
+    .rack {
+        position: absolute;
+        
+        width: 5.5em;
+        height: 32em;
+        background-color: black;
+        
+        border-radius: 4px;
+         -moz-border-radius: 3px;
+         -webkit-border-radius: 3px;
+         
+        border: 1.5px solid lightgrey;
+    }
+    
+    
+    img#sw,
+    img#threshold,
+    img#knee,
+    img#ratio,
+    img#reduction,
+    img#attack,
+    img#release {
+        cursor: pointer;
+    }
+    
+    
+    .small_knob_value {
+        position: absolute;
+        color: lightseagreen;
+        font-size: 9px;
+    }
+    
+    .powerOff {
+        display: none;
+    }
+    
+    .signature {
+        position: absolute;
+        color: white;
+        font-size: 11px;
+        font-family: 'Lora', serif;
+        font-style: italic;
+    }
+    
+    
