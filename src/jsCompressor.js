@@ -1,9 +1,9 @@
 /**
  *   jsComp
- *  
+
  * jsPlay Compressor
  * 
- * @author TGrif 2015 - MIT Licence
+ * TGrif - MIT Licence - 2015
  * 
  * 
  * @requires jquery, jquery-ui, jqskin, jsElements, jsCompressor-core, AudioContext()
@@ -138,14 +138,17 @@ $(function() {
             
                 change: (function() {
                     
+                    var thresholdValue = jsComp.compressor.threshold.value;
+                    
                         
+                            thresholdHandler(thresholdValue);
+                    
+                    
                         jsComp.setThreshold(
                                 $(this).knob('value')
                             );
-                    
-                        $('#threshold_value').html(
-                                - jsComp.compressor.threshold.value
-                            );
+                        
+                        $('#threshold_value').html(thresholdValue + ' dB');
                     
                 })
             
@@ -160,8 +163,8 @@ $(function() {
                         $('<div />', {
                             id: 'threshold_value',
                             class: 'small_knob_value powerOff',
-                            style: 'left: ' + (topX + 58) + 'px; top: ' + (topY + 165) + 'px;',
-                            html: $('#threshold').knob('value')
+                            style: 'left: ' + (topX + 54) + 'px; top: ' + (topY + 165) + 'px;',
+                            html: '-' + $('#threshold').knob('value') + ' dB'
                         })
 
                             .appendTo('#jsComp');
@@ -190,14 +193,16 @@ $(function() {
             
                 change: (function() {
                     
-
+                    var ratioValue = jsComp.compressor.ratio.value;
+                    
+                    
+                            ratioHandler(ratioValue);
+                            
                         jsComp.setRatio(
                                 $(this).knob('value')
                             );
                         
-                        $('#ratio_value').html(
-                                jsComp.compressor.ratio.value
-                            );
+                        $('#ratio_value').html(ratioValue);
                     
                 })
             
@@ -243,13 +248,15 @@ $(function() {
             
                 change: (function() {
                     
+                    var makeupValue = jsComp.compressor.reduction.value;
+                    
+                    
+                            makeupGainHandler(makeupValue);
                         
                         var reduction = Math.round($(this).knob('value'));                                    
                         jsComp.setMakeUp(reduction);
                         
-                        $('#reduction_value').html(
-                                jsComp.compressor.reduction.value
-                            );
+                        $('#reduction_value').html(makeupValue + ' dB');
                     
                 })
                 
@@ -265,7 +272,7 @@ $(function() {
                             id: 'reduction_value',
                             class: 'small_knob_value powerOff',
                             style: 'left: ' + (topX + 50) + 'px; top: ' + (topY + 328) + 'px;',
-                            html: $('#reduction').knob('value')
+                            html: $('#reduction').knob('value') + ' dB'
                         })
 
                             .appendTo('#jsComp');
@@ -292,13 +299,18 @@ $(function() {
             value: jsComp.factorySettings.knee,
             
             
-                change: (function() {                    
-
+                change: (function() {
+                    
+                    var kneeValue = jsComp.compressor.knee.value;
+                    
+                    
+                            kneeHandler(kneeValue);
+                        
                         
                         var knee = Math.round($(this).knob('value'));
                         jsComp.setKnee(knee);
                         
-                        $('#knee_value').html(jsComp.compressor.knee.value);
+                        $('#knee_value').html(kneeValue + ' dB');
                     
                 })
                 
@@ -314,7 +326,7 @@ $(function() {
                             id: 'knee_value',
                             class: 'small_knob_value powerOff',
                             style: 'left: ' + (topX + 37) + 'px; top: ' + (topY + 375) + 'px;',
-                            html: $('#knee').knob('value')
+                            html: $('#knee').knob('value') + ' dB'
                         })
 
                             .appendTo('#jsComp');
@@ -427,6 +439,26 @@ $(function() {
         
         
         
+        
+        
+
+            $('<img/>', {
+                
+                id: 'curveBtn',
+                src: 'img/wave.png',
+                style: 'left: ' + (topX + 25) + 'px; top: ' + (topY + 446) + 'px;',
+                title: "show wave form",
+                
+                    click: function() {
+
+                        if (power)
+                            $('#curve').toggle();
+                    }
+            })
+            
+                .appendTo('#jsComp');
+
+
 
 
 
@@ -440,7 +472,6 @@ $(function() {
 
                 .appendTo('#jsComp');
     
-
 
 
 

@@ -48,6 +48,12 @@
         display: none;
     }
     
+    img#curveBtn {
+        position: absolute;
+        width: 25px;
+        cursor: pointer;
+    }
+    
     .signature {
         position: absolute;
         color: white;
@@ -57,3 +63,8 @@
     }
     
     
+    #curve {
+        display: none;
+        border: 2px inset blue;
+        margin-left: 89px;
+    }
