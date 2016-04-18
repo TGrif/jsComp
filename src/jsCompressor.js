@@ -1,25 +1,20 @@
 /**
- *   jsComp
-
- * jsPlay Compressor
- * 
- * TGrif - MIT Licence - 2015
- * 
- * 
- * @requires jquery, jquery-ui, jqskin, jsElements, jsCompressor-core, AudioContext()
- * 
+ *  jsComp
+ *    Web Audio Compressor
+ *    
+ * https://github.com/TGrif/jsComp
  */
 
  
  
     var
  
- 
-            Ctx = window.AudioContext(),
+            audioCtx = window.AudioContext || window.webkitAudioContext,
+                    
+                Ctx = new audioCtx(),
         
         
-                jsComp = new Compressor(Ctx);
-        
+                    jsComp = new Compressor(Ctx),
         
         
         
@@ -41,9 +36,7 @@ $(function() {
                     id: "jsComp"
                 })
                 
-                    .appendTo('body');
-    
-    
+                    .appendTo('body');    
             
 
 
@@ -73,8 +66,6 @@ $(function() {
 
 
 
-
-
                 /**  TOGGLE SWITCH  **/
                   
             
@@ -97,14 +88,17 @@ $(function() {
 
 
                         $(this).prop('title', (power) ? 'power off' : 'power on');
+                        
                         $('#led').switch("value", $(this).switch("value"));
                         
                         
                             if (power) {
                                $('.small_knob_value').removeClass('powerOff');
+							   $('#curve').show();
                             } else {
                                 $('.small_knob_value').addClass('powerOff');
-                            }
+								$('#curve').hide();
+                            }                        
                         
                     })
                 
@@ -114,8 +108,6 @@ $(function() {
               
                   .appendTo('#jsComp');
 
-
-      
       
       
       
@@ -168,10 +160,8 @@ $(function() {
                         })
 
                             .appendTo('#jsComp');
-                
         
         
-
 
 
 
@@ -227,9 +217,6 @@ $(function() {
 
 
 
-
-
-
                     /**  MAKE UP KNOB  **/
                 
 
@@ -248,7 +235,7 @@ $(function() {
             
                 change: (function() {
                     
-                    var makeupValue = jsComp.compressor.reduction.value;
+                    var makeupValue = jsComp.compressor.reduction.value.toFixed(2);
                     
                     
                             makeupGainHandler(makeupValue);
@@ -275,9 +262,7 @@ $(function() {
                             html: $('#reduction').knob('value') + ' dB'
                         })
 
-                            .appendTo('#jsComp');
-                        
-        
+                            .appendTo('#jsComp');                        
         
         
         
@@ -330,8 +315,6 @@ $(function() {
                         })
 
                             .appendTo('#jsComp');
-                        
-
 
 
 
@@ -371,8 +354,7 @@ $(function() {
             .prop('title', 'attack')
         
                 .appendTo('#jsComp');
-        
-
+		
 
 
                         $('<div />', {
@@ -382,13 +364,10 @@ $(function() {
                             html: $('#attack').knob('value')
                         })
 
-                            .appendTo('#jsComp');
-
+                            .appendTo('#jsComp');        
         
         
         
-        
-
 
                     /**  RELEASE KNOB  **/
                     
@@ -426,7 +405,6 @@ $(function() {
 
 
 
-
                         $('<div />', {
                             id: 'release_value',
                             class: 'small_knob_value powerOff',
@@ -434,12 +412,9 @@ $(function() {
                             html: $('#release').knob('value')
                         })
 
-                            .appendTo('#jsComp');
-
+                            .appendTo('#jsComp');        
         
-        
-        
-        
+           
         
 
             $('<img/>', {
@@ -460,8 +435,6 @@ $(function() {
 
 
 
-
-
     
             $('<div/>', {
                 id: "jsCompSignature",
@@ -472,9 +445,6 @@ $(function() {
 
                 .appendTo('#jsComp');
     
-
-
-
 
 
 

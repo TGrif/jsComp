@@ -1,57 +1,39 @@
-/**
- *  jsComp audio-test
- * 
- * @author TGrif 2015 - MIT Licence
- * 
- *  @requires AudioContext()
- */ 
+ /**
+  *  jsComp
+  *    Web Audio Compressor
+  *    [audio test]
+  *     
+  * https://github.com/TGrif/jsComp
+  */ 
  
- 
- 
-    var  
+    var
+
+		source = Ctx.createBufferSource(),
+
+		request = new XMLHttpRequest(),
 
 
-
-            source = Ctx.createBufferSource(),
-
-            request = new XMLHttpRequest(),
-            
-
-                buffer,
-                
-                
-                    sampleSound = 'test/audio/sample.ogg';
-    
-    
-    
+			sampleSound = 'test/audio/sample.ogg';
     
   
         request.open("GET", sampleSound, true);
         request.responseType = 'arraybuffer';
         request.onload = function() {
-            Ctx.decodeAudioData(request.response, function(buff) {                
+            Ctx.decodeAudioData(request.response, function (buff) {                
                 source.buffer = buff;
-            }, function(err) {
+            }, function (err) {
                 console.warn(err);
-            });
+            })
             
-        };  
+        }
         
-            request.send();
+			request.send();
 
 
-
-
-  
     source.connect(jsComp.compressor);
     jsComp.compressor.connect(Ctx.destination);
        
-       
-        
-
-        console.info('starting sound...');
+    console.info('starting sound...');
     
-
     source.start(0);
-
 
