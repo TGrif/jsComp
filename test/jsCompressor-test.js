@@ -1,38 +1,35 @@
  /**
-  *  jsComp
-  *    Web Audio Compressor
+  * jsComp - Web Audio Compressor
   *    [audio test]
   *     
   * https://github.com/TGrif/jsComp
+  * 
   */ 
  
-    var
+    var source = Ctx.createBufferSource();
 
-		source = Ctx.createBufferSource(),
+    var request = new XMLHttpRequest();
 
-		request = new XMLHttpRequest(),
-
-
-			sampleSound = 'test/audio/sample.ogg';
+    var sampleSound = 'test/audio/sample.ogg';
     
   
-        request.open("GET", sampleSound, true);
-        request.responseType = 'arraybuffer';
-        request.onload = function() {
-            Ctx.decodeAudioData(request.response, function (buff) {                
-                source.buffer = buff;
-            }, function (err) {
-                console.warn(err);
-            })
-            
-        }
+    request.open("GET", sampleSound, true);
+    request.responseType = 'arraybuffer';
+    request.onload = function() {
+        Ctx.decodeAudioData(request.response, function (buff) {
+            source.buffer = buff;
+        }, function (err) {
+            console.warn(err);
+        })
         
-			request.send();
+    }
+    
+    request.send();
 
 
     source.connect(jsComp.compressor);
     jsComp.compressor.connect(Ctx.destination);
-       
+    
     console.info('starting sound...');
     
     source.start(0);
