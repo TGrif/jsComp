@@ -25,24 +25,33 @@ function Compressor(audioCtx) {
   }
 
   this.compressor = dynamicsCompressor;
+  // console.log(this.compressor.reduction) // TODO
   this.power = false;
+  
 }
-
 
 
 Compressor.prototype = {
 
-
+  switchPower: function() {
+    this.power = !this.power;
+  },
+  
+  
   /**
   * @param {float} threshold     range(-60, 0)
   */
-  setThreshold: function (threshold) {
-    this.compressor.threshold.value = - Math.round((threshold * 60) / 100);
+  setThreshold: function (threshold) {  // TODO décalage à l'alumage avec le graphe
+    thresholdValue = - Math.round((threshold * 60) / 100);
+    this.compressor.threshold.value = thresholdValue;
+    // console.log(this.compressor.threshold.value)
+    thresholdHandler(thresholdValue);
   },
 
-
-  thresholdKnobValue: function() {
-    return 100 / (60 / - this.factorySettings.threshold);
+  getThreshold: function() {
+    // return 100 / (60 / - this.factorySettings.threshold);
+    // return 100 / (60 / - this.compressor.threshold.value);
+    return this.compressor.threshold.value
   },
 
 
@@ -62,12 +71,16 @@ Compressor.prototype = {
 
 
   /**
-  * @param {float} makeUp     range(1, 24)
+  * @param {float} makeUp     range(1, 24)  // TODO https://github.com/Theodeus/tuna/blob/master/tuna.js
   */
   setMakeUp: function (makeUp) {
     this.compressor.reduction.value = Math.round((makeUp * 24) / 100) > 1
       ? Math.round((makeUp * 24) / 100)
       : 1;
+  },
+  
+  makeUpKnobValue: function() {
+    return 100 / (20 / this.factorySettings.reduction);
   },
 
 
@@ -86,6 +99,10 @@ Compressor.prototype = {
     this.compressor.attack.value = (Math.round(attack) / 100).toFixed(2);
   },
 
+  getAttack: function() {
+    return jsComp.compressor.attack.value.toFixed(2)
+  },
+
 
   /**
   * @param {float} release   range(0, 1)
@@ -93,6 +110,5 @@ Compressor.prototype = {
   setRelease: function (release) {
     this.compressor.release.value =	(Math.round(release) / 100).toFixed(2);
   }
-
 
 }

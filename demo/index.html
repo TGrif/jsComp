@@ -3,7 +3,7 @@
     
   <head>
       
-    <title>jsCompressor</title>
+    <title>jsComp demo</title>
     
     
         <link rel="stylesheet" type="text/css" href="style/jsCompressor.css" />
@@ -17,15 +17,20 @@
           <script src="lib/curve.js"></script>
           
           <script src="../src/jsCompressor.js"></script>
-          <script src="js/jsCompressor-demo.js"></script>
           
-            <!--<script src="test/jsCompressor-test.js"></script>-->
+          <script src="js/jsCompressor-demo.js"></script>
+          <script src="js/audio-player.js"></script>
           
 
   </head>
   
   <body>
-         
+       
+       <div id="player">
+        <input type="file" name="sound" id="sound" /><br/>
+        <!--<audio id="audio" controls></audio> --><!-- autoplay -->
+      </div>
+      
       <div id="jsComp_rack" class="rack" style="left: 0px; top: 0px;"></div>
       <canvas id="curve" height="511" width="639"></canvas>
       
